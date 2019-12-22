@@ -443,6 +443,13 @@ function WIKISUBCATEGORIES(category, opt_namespaces) {
  * @return {Array<string>} The list of categories.
  * @customfunction
  */
+/** The Wikipedia API limits to 500 pages
+ * View documentation for Category Members → https://www.mediawiki.org/wiki/API:Categorymembers
+ * If category contains more than 500 pages, the API call returns a new line <continue cmcontinue="page|514b4d392f392b292d4f314b011001dc0f|59817068" continue="-||"/>
+ * E.g: https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmlimit=max&cmprop=title&cmtype=subcat%7Cpage&format=xml&cmnamespace=0&cmtitle=Category:Bacteria_genera
+ * It is necessary to program n new calls by adding cmcontinue with the indicated value
+ * E.g: https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmlimit=max&cmprop=title&cmtype=subcat%7Cpage&format=xml&cmnamespace=0&cmtitle=Category:Bacteria_genera&cmcontinue=page|2f3141314f4b392904098c2b292d4f314b3929098e011701dc16|56801168
+ */
 function WIKICATEGORIES(article) {
   'use strict';
   if (!article) {
